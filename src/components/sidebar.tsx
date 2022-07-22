@@ -47,6 +47,8 @@ export default function Sidebar() {
     {
       name: "Inventario",
       route: "/inventory",
+      open: false,
+      icon: collection,
       children: [
         {
           name: "Categorías",
@@ -61,6 +63,8 @@ export default function Sidebar() {
     {
       name: "Operaciones",
       route: "/operations",
+      open: false,
+      icon: cog,
       children: [
         {
           name: "Devoluciones y anulaciones",
@@ -71,6 +75,8 @@ export default function Sidebar() {
     {
       name: "Guías",
       route: "/guides",
+      open: false,
+      icon: bookOpen,
       children: [
         {
           name: "Guías de ingresos",
@@ -83,7 +89,7 @@ export default function Sidebar() {
       ],
     },
 
-  ]
+  ])
 
   return (
     <div class="w-60 h-full shadow-md absolute bg-gradient-to-b from-cyan-600 to-emerald-500 overflow-scroll">
