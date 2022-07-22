@@ -1,25 +1,45 @@
-import { For, createSignal }  from "solid-js";
+import { For, Show, createSignal }  from "solid-js";
+import { createStore }  from "solid-js/store";
+import { Icon } from "solid-heroicons";
+import {
+  home,
+  shoppingBag,
+  collection,
+  cog,
+  bookOpen,
+  chevronDown,
+  chevronUp,
+} from "solid-heroicons/solid";
 
 export default function Sidebar() {
 
   const [selected, setSelected] = createSignal("/");
 
-  const menuItems = [
+  function selectItem(item: any) {
+    setSelected(item.route);
+    setMenuItems((menuItem: any) => menuItem.route == item.route, "open", open => !open);
+  }
+
+  const [menuItems, setMenuItems] = createStore([
     {
       name: "Inicio",
       route: "/",
+      open: false,
+      icon: home,
       children: null,
     },
     {
       name: "Ventas",
       route: "/sales",
+      open: false,
+      icon: shoppingBag,
       children: [
         {
           name: "Crear",
           route: "/new",
         },
         {
-          name: "Registros",
+          name: "Registro",
           route: "/",
         },
       ],
