@@ -1,6 +1,6 @@
 import { For, createSignal }  from "solid-js";
 
-export default function Navbar() {
+export default function Sidebar() {
 
   const [selected, setSelected] = createSignal("/");
 
