@@ -1,6 +1,9 @@
+import { lazy } from "solid-js";
 import SideBar from "../components/sidebar";
 import { Routes, Route } from "solid-app-router";
-import Home from "../pages/home";
+
+const Home = lazy(() => import("../pages/home"));
+const Sales = lazy(() => import("../pages/sales"));
 
 export default function Default() {
   return (
@@ -11,6 +14,7 @@ export default function Default() {
       <div class="ml-60 w-full">
         <Routes>
           <Route path="/" component={Home} />
+          <Route path="/sales" component={Sales} />
         </Routes>
       </div>
     </div>
