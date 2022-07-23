@@ -1,10 +1,10 @@
 import type { Component } from "solid-js";
-import Home from "./pages/home";
+import Default from "./layouts/default";
 
 const App: Component = () => {
   return (
     <>
-      <Home />
+      <Default />
     </>
   );
 };
