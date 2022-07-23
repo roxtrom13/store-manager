@@ -103,7 +103,7 @@ export default function Sidebar() {
           (item: any) => (
             <>
               <div
-                class="border rounded p-3 border-cyan-100 border-none m-1 text-white font-semibold text-xl cursor-pointer hover:bg-cyan-600 active:bg-cyan-700 flex align-middle leading-4"
+                class="border rounded p-3 border-cyan-100 border-none m-1 text-white font-medium text-xl cursor-pointer hover:bg-cyan-600 active:bg-cyan-700 flex align-middle leading-4 transition-all ease-in-out duration-500"
                 classList={{"bg-cyan-700": selected() == item.route}}
                 onClick={() => selectItem(item)}
               >
@@ -112,14 +112,15 @@ export default function Sidebar() {
                 <span class="inline">
                   {item.name}
                 </span>
+                {/*@ts-ignore*/}
                 <Show when={!!item.children}>
                   <Icon class="mr-2 ml-auto" path={item.open ? chevronUp : chevronDown} height="18px" />
                 </Show>
               </div>
               {/*TODO: It needs to do animations*/}
               <ul
-                class="ml-3 mr-1"
-                classList={{hidden: !item.open}}
+                class="ml-3 mr-1 block"
+                classList={{'hidden': !item.open}}
               >
                 {/*@ts-ignore*/}
                 <For each={item.children}>{
