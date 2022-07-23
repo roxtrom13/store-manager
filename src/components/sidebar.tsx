@@ -103,22 +103,37 @@ export default function Sidebar() {
         <For each={menuItems}>{
           (item: any) => (
             <>
-              <Link
-                href={!!item.children ? item.route : "#"}
-                class="border rounded p-3 border-cyan-100 border-none m-1 text-white font-medium text-xl cursor-pointer hover:bg-cyan-600 active:bg-cyan-700 flex align-middle leading-4"
+              <div
+                class="border rounded p-3 border-cyan-100 border-none m-1 text-white font-medium text-xl cursor-pointer hover:bg-cyan-600 active:bg-cyan-700 align-middle leading-4"
                 classList={{"bg-cyan-700": selected() == item.route}}
                 onClick={() => selectItem(item)}
               >
-                <Icon path={item.icon} height="18px" class="mr-2">
-                </Icon>
-                <span class="inline">
-                  {item.name}
-                </span>
-                {/*@ts-ignore*/}
-                <Show when={!!item.children}>
-                  <Icon class="mr-2 ml-auto" path={item.open ? chevronUp : chevronDown} height="18px" />
+                <Show when={!item.children} fallback={
+                  <div class="flex">
+                    <Icon path={item.icon} height="18px" class="mr-2">
+                    </Icon>
+                    <span class="inline">
+                      {item.name}
+                    </span>
+                    {/*@ts-ignore*/}
+                    <Show when={!!item.children}>
+                      <Icon class="mr-2 ml-auto" path={item.open ? chevronUp : chevronDown} height="18px" />
+                    </Show>
+                  </div>
+                }>
+                  <Link href={item.route} class="flex">
+                    <Icon path={item.icon} height="18px" class="mr-2">
+                    </Icon>
+                    <span class="inline">
+                      {item.name}
+                    </span>
+                    {/*@ts-ignore*/}
+                    <Show when={!!item.children}>
+                      <Icon class="mr-2 ml-auto" path={item.open ? chevronUp : chevronDown} height="18px" />
+                    </Show>
+                  </Link>
                 </Show>
-              </Link>
+              </div>
               <ul
                 class="ml-3 mr-1 block"
                 classList={{'hidden': !item.open}}
@@ -126,9 +141,11 @@ export default function Sidebar() {
                 {/*@ts-ignore*/}
                 <For each={item.children}>{
                   (child: any) => (
-                    <li class="text-white mb-1 font-semibold py-2 px-3 rounded-md bg-teal-600 transition-all hover:bg-cyan-600 cursor-pointer">
-                      {child.name}
-                    </li>
+                    <Link href={item.route + child.route}>
+                      <li class="text-white mb-1 font-semibold py-2 px-3 rounded-md bg-teal-600 transition-all hover:bg-cyan-600 cursor-pointer">
+                        {child.name}
+                      </li>
+                    </Link>
                   )
                 }</For>
               </ul>
