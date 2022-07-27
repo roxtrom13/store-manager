@@ -1,96 +1,24 @@
 import { For, Show, createSignal }  from "solid-js";
-import { createStore }  from "solid-js/store";
 import { Link } from "solid-app-router";
 import { Icon } from "solid-heroicons";
 import {
-  home,
-  shoppingBag,
-  collection,
-  cog,
-  bookOpen,
   chevronDown,
   chevronUp,
 } from "solid-heroicons/solid";
 
+import Store from "../store";
+
 export default function Sidebar() {
 
   const [selected, setSelected] = createSignal("/");
+  const [store, setStore ] = Store;
+
+  console.log(store.menuItems);
 
   function selectItem(item: any) {
     setSelected(item.route);
-    setMenuItems((menuItem: any) => menuItem.route == item.route, "open", open => !open);
+    setStore("menuItems", menuItem => menuItem.route == item.route, "open", open => !open);
   }
-
-  const [menuItems, setMenuItems] = createStore([
-    {
-      name: "Inicio",
-      route: "/",
-      open: false,
-      icon: home,
-      children: null,
-    },
-    {
-      name: "Ventas",
-      route: "/sales",
-      open: false,
-      icon: shoppingBag,
-      children: [
-        {
-          name: "Crear",
-          route: "/new",
-        },
-        {
-          name: "Registro",
-          route: "/",
-        },
-      ],
-    },
-    {
-      name: "Inventario",
-      route: "/inventory",
-      open: false,
-      icon: collection,
-      children: [
-        {
-          name: "Categorías",
-          route: "/categories",
-        },
-        {
-          name: "Productos",
-          route: "/products",
-        },
-      ],
-    },
-    {
-      name: "Operaciones",
-      route: "/operations",
-      open: false,
-      icon: cog,
-      children: [
-        {
-          name: "Devoluciones y anulaciones",
-          route: "/devolutions",
-        },
-      ],
-    },
-    {
-      name: "Guías",
-      route: "/guides",
-      open: false,
-      icon: bookOpen,
-      children: [
-        {
-          name: "Guías de ingresos",
-          route: "/income",
-        },
-        {
-          name: "Guías de salidas",
-          route: "/departure",
-        },
-      ],
-    },
-
-  ])
 
   return (
     <div class="w-60 h-full shadow-md absolute bg-gradient-to-b from-cyan-600 to-emerald-500 overflow-scroll">
@@ -100,7 +28,7 @@ export default function Sidebar() {
       </div>
       <div class="relative py-2 pr-1">
         {/*@ts-ignore*/}
-        <For each={menuItems}>{
+        <For each={store.menuItems}>{
           (item: any) => (
             <>
               <div
