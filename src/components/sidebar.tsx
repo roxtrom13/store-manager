@@ -13,8 +13,6 @@ export default function Sidebar() {
   const [selected, setSelected] = createSignal("/");
   const [store, setStore ] = Store;
 
-  console.log(store.menuItems);
-
   function selectItem(item: any) {
     setSelected(item.route);
     setStore("menuItems", menuItem => menuItem.route == item.route, "open", open => !open);
