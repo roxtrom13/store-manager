@@ -40,7 +40,7 @@ export default function Sidebar() {
                   <div class="flex">
                     <Icon path={item.icon} height="18px" class="mr-2">
                     </Icon>
-                    <span class="inline">
+                    <span class="hidden md:inline">
                       {item.name}
                     </span>
                     {/*@ts-ignore*/}
@@ -52,7 +52,7 @@ export default function Sidebar() {
                   <Link href={item.route} class="flex">
                     <Icon path={item.icon} height="18px" class="mr-2">
                     </Icon>
-                    <span class="inline">
+                    <span class="hidden md:inline">
                       {item.name}
                     </span>
                     {/*@ts-ignore*/}
@@ -73,6 +73,7 @@ export default function Sidebar() {
                       <li class="text-white mb-1 font-semibold py-2 px-3 rounded-md bg-teal-600 transition-all hover:bg-cyan-600 cursor-pointer">
                         {child.name}
                       </li>
+                      {/* TODO: change to icons when sm and <md */}
                     </Link>
                   )
                 }</For>
