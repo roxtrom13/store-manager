@@ -4,25 +4,27 @@ import { Icon } from "solid-heroicons";
 import {
   chevronDown,
   chevronUp,
+  musicNote,
 } from "solid-heroicons/solid";
 
 import Store from "../store";
+import { MenuItem } from "../types";
 
 export default function Sidebar() {
 
   const [selected, setSelected] = createSignal("/");
   const [store, setStore ] = Store;
 
-  function selectItem(item: any) {
+  function selectItem(item: MenuItem) {
     setSelected(item.route);
     setStore("menuItems", menuItem => menuItem.route == item.route, "open", open => !open);
   }
 
   return (
-    <div class="w-60 h-full shadow-md absolute bg-gradient-to-b from-cyan-600 to-emerald-500 overflow-scroll">
-      <div class="p-6 inline-flex relative w-full text-center border-2 border-transparent border-b-cyan-700">
-        <div class="h-2 w-2 bg-black"></div>
-        <p class="font-sans text-2xl font-semibold text-white pl-2">Musicman</p>
+    <div class="fixed left-0 top-0 bg-gradient-to-b from-cyan-600 to-emerald-500 h-full w-24 md:w-60 z-50 transition-all ease-linear">
+      <div class="p-6 flex h-16 w-full items-center">
+        <Icon class="text-white" path={musicNote} height="1.5rem"></Icon>
+        <p class="hidden md:block font-sans text-2xl font-semibold text-white pl-2">Musicman</p>
       </div>
       <div class="relative py-2 pr-1">
         {/*@ts-ignore*/}
